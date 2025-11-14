@@ -1,71 +1,97 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* ✅ Scroll behavior */
-html {
-  scroll-behavior: smooth;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ✅ Custom scrollbar for better aesthetics */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* ✅ Ensure the root element takes full height */
 #root {
+  width: 100%;
   min-height: 100vh;
 }
 
-/* ✅ Global custom text style */
-.welcome-text {
-  @apply text-5xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent;
+/* Custom scrollbar for page content */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* ✅ Global primary button style */
-.btn-primary {
-  @apply px-6 py-2 rounded-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition duration-300;
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
 }
 
-/* ✅ Global section container style */
-.section {
-  @apply max-w-6xl mx-auto px-6 py-16;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #06b6d4;
+  border-radius: 10px;
 }
 
-/* ✅ Keyframes animation */
-@keyframes blob {
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #0891b2;
+}
+
+/* Smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Page flip animation enhancement */
+@keyframes pageFlip {
   0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
+    transform: rotateY(0deg);
   }
   100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: rotateY(-180deg);
   }
 }
 
-/* ✅ Animation utility classes */
-.animate-blob {
-  animation: blob 7s infinite;
+/* 3D perspective for book */
+.perspective-\[2000px\] {
+  perspective: 2000px;
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
+/* Ensure smooth rendering */
+button,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* Print styles (optional) */
+@media print {
+  body {
+    background: white;
+  }
+}
+
+@keyframes modalPopup {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-modalPopup {
+  animation: modalPopup 0.25s ease-out;
 }
