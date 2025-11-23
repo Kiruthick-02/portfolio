@@ -2,96 +2,113 @@
 @tailwind components;
 @tailwind utilities;
 
+/* --------------------------- */
+/* GLOBAL RESET & THEME        */
+/* --------------------------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-#root {
-  width: 100%;
-  min-height: 100vh;
-}
-
-/* Custom scrollbar for page content */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #06b6d4;
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #0891b2;
-}
-
-/* Smooth transitions */
-* {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Page flip animation enhancement */
-@keyframes pageFlip {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(-180deg);
-  }
+body {
+  font-family: "Open Sans", sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background: #151f28;
 }
 
-/* 3D perspective for book */
-.perspective-\[2000px\] {
-  perspective: 2000px;
+/* --------------------------- */
+/* 3D CARD AREA + BACKGROUND   */
+/* --------------------------- */
+.animation-area {
+  background: linear-gradient(to right, #f37335, #fdc830);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Ensure smooth rendering */
-button,
-input,
-textarea {
-  -webkit-tap-highlight-color: transparent;
+/* Floating squares */
+.box-area li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 25px;
+  height: 25px;
+  background: rgba(255,255,255,0.25);
+  animation: animate 20s linear infinite;
+  bottom: -150px;
 }
 
-button:focus,
-input:focus,
-textarea:focus {
-  outline: none;
+.box-area li:nth-child(1){left:86%;width:80px;height:80px;animation-delay:7s;}
+.box-area li:nth-child(2){left:12%;width:30px;height:30px;animation-delay:1.5s;animation-duration:5s;}
+.box-area li:nth-child(3){left:70%;width:100px;height:100px;animation-delay:5.5s;}
+.box-area li:nth-child(4){left:42%;width:150px;height:150px;animation-delay:0s;animation-duration:6s;}
+.box-area li:nth-child(5){left:65%;width:40px;height:40px;animation-delay:7s;}
+.box-area li:nth-child(6){left:15%;width:110px;height:110px;animation-delay:3.5s;}
+
+@keyframes animate {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-800px) rotate(360deg); opacity: 0; }
 }
 
-/* Print styles (optional) */
-@media print {
-  body {
-    background: white;
-  }
+/* --------------------------- */
+/* 3D CARD STYLES              */
+/* --------------------------- */
+.container {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  margin: 0 auto;
+  height: 100%;
+  z-index: 999;
 }
 
-@keyframes modalPopup {
-  0% {
-    opacity: 0;
-    transform: scale(0.85);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+.card {
+  transition: all 0.75s;
+  max-width: 550px;
+  border-radius: 30px;
+  padding: 2vh 5%;
+  background-image: url(img/bg.webp);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 20px 20px rgba(0,0,0,0.2),
+              0px 0px 50px rgba(0,0,0,0.2);
+  transform-style: preserve-3d;
+  z-index: 9999;
 }
 
-.animate-modalPopup {
-  animation: modalPopup 0.25s ease-out;
+.card.has-transform {
+  transition: all 100ms linear;
+}
+
+.goku {
+  display: flex;
+  justify-content: center;
+  transform-style: preserve-3d;
+  margin-bottom: 5vh;
+}
+
+.goku img {
+  width: 80%;
+  z-index: 2;
+  transition: all 0.75s ease-out;
+}
+
+.goku img.has-transform {
+  transform: translateZ(200px);
+}
+
+.zoom-in-zoom-out {
+  animation: zoom-in-zoom-out 2s ease-out infinite;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
